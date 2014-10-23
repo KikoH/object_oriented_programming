@@ -1,7 +1,7 @@
 class Rover
-	x_move = 0
-	y_move = 0
-	changedirection = 0
+	
+	attr_accessor :x, :y, :direction
+	current_positon = " "
 	def initialize(x=0, y=0, direction="N")
 		@x = x
 		@y = y
@@ -12,30 +12,59 @@ class Rover
 		"#{@x}, #{@y}, #{@direction}"
 	end
 
-	# def read_instructions(instruction)
-	# 	if instruction == "M"
-	# 		move
-	# 	end
-	# end
-
-	def move(x_move, y_move)
-		if x_move != 0
-		@y += x_move
+	def read_instructions(instruction)
+		if instruction == "M"
+			move
+		elsif instruction == "L"
+			turn_left
+		elsif instruction == "R"
+			turn_right
 		end
-		if y_move != 0
-		@x += y_move
+	end
+
+	def move
+		if @direction == "N"
+			@y += 1
+		elsif @direction == "W"
+			@x -= 1
+		elsif @direction == "E"
+			@x += 1
+		elsif @direction == "S"
+			@y -= 1
+		end
+	end
+
+	def turn_right
+		if @direction == "N"
+			@direction = "E"
+		elsif @direction == "E"
+			@direction = "S"
+		elsif @direction == "S"
+			@direction = "W"
+		elsif @direction == "W"
+			@direction = "N"
+		end
+	end
+
+	def turn_left
+		if @direction == "N"
+			@direction = "W"
+		elsif @direction == "W"
+			@direction = "S"
+		elsif @direction == "S"
+			@direction = "E"
+		elsif @direction == "E"
+			@direction = "N"
+		end
 	end
 end
 
-	def turn(changedirection)
-		if changedirection != 0
-			@direction = changedirection
-		end
-	 end
-end
-
 rover = Rover.new
-rover.move(2, 5)
-#rover.turn("E")
+puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
+while true
+order = gets.chomp
+rover.read_instructions(order)
+puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
 puts rover
+end
 

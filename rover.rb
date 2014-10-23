@@ -1,16 +1,17 @@
 class Rover
-	
 	attr_accessor :x, :y, :direction
+	#Initializing class with x, y and direction values
 	def initialize(x=0, y=0, direction="N")
 		@x = x
 		@y = y
 		@direction = direction
 	end
-
+	#Method used to display output
 	def to_s
 		"#{@x}, #{@y}, #{@direction}"
 	end
-
+	#Method for handling instructions the user inputs.
+	# If user wants to move then call the move method. Same for turning
 	def read_instructions(instructions)
 		instructions.split(//).each do |x|
 		if x == "M"
@@ -20,9 +21,9 @@ class Rover
 		elsif x == "R"
 			turn_right
 		end
+		end
 	end
-	end
-
+	# Method used to move the rover
 	def move
 		if @direction == "N"
 			@y += 1
@@ -34,7 +35,7 @@ class Rover
 			@y -= 1
 		end
 	end
-
+	# Method used to turn the rover right
 	def turn_right
 		if @direction == "N"
 			@direction = "E"
@@ -46,7 +47,7 @@ class Rover
 			@direction = "N"
 		end
 	end
-
+	# Method used to turn the rover left
 	def turn_left
 		if @direction == "N"
 			@direction = "W"
@@ -60,8 +61,10 @@ class Rover
 	end
 end
 
+#Instantiating a new rover
 rover = Rover.new
 puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
+#A loop to keep taking questions from the user
 while true
 order = gets.chomp
 rover.read_instructions(order)

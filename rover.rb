@@ -11,14 +11,16 @@ class Rover
 		"#{@x}, #{@y}, #{@direction}"
 	end
 
-	def read_instructions(instruction)
-		if instruction == "M"
+	def read_instructions(instructions)
+		instructions.split(//).each do |x|
+		if x == "M"
 			move
-		elsif instruction == "L"
+		elsif x == "L"
 			turn_left
-		elsif instruction == "R"
+		elsif x == "R"
 			turn_right
 		end
+	end
 	end
 
 	def move

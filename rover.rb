@@ -61,14 +61,44 @@ class Rover
 	end
 end
 
+
+#Getting input for how big the grid is
+$grid_x, $grid_y = gets.chomp.split
 #Instantiating a new rover
 rover = Rover.new
 puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
 #A loop to keep taking questions from the user
-while true
-order = gets.chomp
-rover.read_instructions(order)
-puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
-puts rover
+# while true
+	order = gets.chomp
+	rover.read_instructions(order)
+	puts "Rover is facing #{rover.direction} and X= #{rover.x} and Y= #{rover.y}"
+	puts rover
+
+# end
+
+# Grid visualisation 
+
+row_a = ["---"]*$grid_x.to_i
+separator = ([""]+row_a+[""]).join('+')
+
+$grid_y.to_i.times do |row|
+	puts separator
+
+
+	row_b = ["   "]*$grid_x.to_i
+			if rover.y == row
+				if rover.direction == "N"
+					row_b[rover.x] = " ^ " 
+				elsif rover.direction == "E"
+					row_b[rover.x] = " > "
+				elsif rover.direction == "S"
+					row_b[rover.x] = " v "
+				elsif rover.direction == "W"
+					row_b[rover.x] = " < "
+				end
+			end
+
+	puts ([""]+row_b+[""]).join('|')
 end
 
+puts separator
